@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: spring-order-system
+
+  datasource:
+    url: jdbc:postgresql://localhost:${DB_PORT:5432}/${DB_NAME:pedidos_db}
+    username: ${DB_USER:pedidos_user}
+    password: ${DB_PASSWORD:pedidos_pass}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  rabbitmq:
+    host: localhost
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:rabbitmq_user}
+    password: ${RABBITMQ_PASSWORD:rabbitmq_pass}
