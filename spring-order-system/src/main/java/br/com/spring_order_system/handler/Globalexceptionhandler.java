@@ -1,6 +1,7 @@
 package br.com.spring_order_system.handler;
 
 import br.com.spring_order_system.dto.ErroResponseDTO;
+import br.com.spring_order_system.exception.ConflitoException;
 import br.com.spring_order_system.exception.RecursoNaoEncontradoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,15 @@ public class GlobalExceptionHandler {
                 ex.getMessage(),
                 List.of());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+    }
+
+    @ExceptionHandler(ConflitoException.class)
+    public ResponseEntity<ErroResponseDTO> tratarConflito(ConflitoException ex) {
+        ErroResponseDTO erro = new ErroResponseDTO(
+                HttpStatus.CONFLICT.value(),
+                ex.getMessage(),
+                List.of());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
